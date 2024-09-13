@@ -1,0 +1,172 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subir entregable</title>
+  </head>
+  <!-- <body>
+    <h1>Subir Entregable</h1>
+    <div>
+      Este Formulario es una prueba para subir un archivo como entregable, para
+      hacer otra prueba existosa debe modificar los datos de entrada del
+      entregable en el script
+    </div>
+    <form id="entregableForm" enctype="multipart/form-data">
+      <input type="file" name="file" />
+      <button type="button" onclick="submitFormEntregable()">
+        Subir Entregable
+      </button>
+    </form>
+
+    <script>
+      function submitFormEntregable() {
+        var form = document.getElementById('entregableForm');
+        var fileNAme = 'prueba_26_12_23';
+
+        // Verificar si hay un valor de DNI antes de hacer la petición
+        if (fileNAme) {
+          // Construir la URL con el valor de DNI
+          var apiUrl =
+            'https://files.ingenieropro.com/api/v1/archivos/entregable?fileName=' +
+            fileNAme;
+
+          // Obtener el archivo seleccionado
+          var fileInput = form.querySelector('[name="file"]');
+          var file = fileInput.files[0];
+
+          // Crear un objeto FormData para enviar los datos del formulario y el archivo
+          var formData = new FormData();
+          formData.append('file', file);
+
+          // Hacer la petición AJAX usando fetch
+          fetch(apiUrl, {
+            method: 'POST',
+            body: formData,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Error en la petición');
+              }
+              // Puedes manejar la respuesta si es necesario
+              return response.json();
+            })
+            .then((data) => {
+              // Puedes realizar acciones con la respuesta de la API aquí
+              var formEntregable = document.getElementById(
+                'registrarEntregableForm',
+              );
+              // Obtener el valor de 'urlArchivo' antes de la petición
+              // var urlArchivoInput = formEntregable.querySelector(
+              //   '[name="urlArchivo"]',
+              // );
+              // urlArchivoInput.value = data.url;
+              registrarEntregable('https://files.ingenieropro.com' + data.url);
+              console.log('Respuesta de la API:', data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        } else {
+          alert('Por favor, ingrese un valor de DNI.');
+        }
+      }
+      function registrarEntregable(urlArchivo) {
+        // Construir la URL de la API
+        var apiUrl =
+          `http://localhost:4000/api/v1/entregable/registrar/ecoambiental?id_curso=35&id_estudiante=71&id_entregable=16&urlArchivo=` +
+          urlArchivo;
+
+        // Crear un objeto FormData y agregar los parámetros
+        var formData = new FormData();
+
+        // Hacer la petición POST usando fetch
+        fetch(apiUrl, {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Error en la petición');
+            }
+            // Parsear la respuesta como JSON
+            return response.json();
+          })
+          .then((data) => {
+            // Puedes realizar acciones con la respuesta de la API aquí
+            console.log('Respuesta de la API:', data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
+
+    <div id="selectedName">Nombre y Apellido Seleccionado</div>
+    <input type="text" id="inputText" placeholder="Ingrese un valor" />
+
+    <div id="result"></div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var inputText = document.getElementById('inputText');
+        var resultDiv = document.getElementById('result');
+        var selectedElement = null;
+        var selectedNameDiv = document.getElementById('selectedName');
+
+        inputText.addEventListener('input', function () {
+          var inputValue = inputText.value;
+          callApi(inputValue);
+        });
+
+        function callApi(value) {
+          var apiUrl =
+            'https://backadmin.ingenieropro.com/api/v1/compra/usuario/ecoambiental?input=' +
+            encodeURIComponent(value);
+
+          fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+              var nombresApellidos = data.slice(0,10).map((item) => {
+                return item.nombre_apellido;
+              });
+
+              var listaHTML = nombresApellidos
+                .map((item, index) => {
+                  return `<div class="selectable" data-index="${index}">${item}</div>`;
+                })
+                .join('');
+
+              resultDiv.innerHTML = listaHTML;
+
+              var elementosSeleccionables =
+                document.querySelectorAll('.selectable');
+
+              elementosSeleccionables.forEach((elemento) => {
+                elemento.addEventListener('click', function () {
+                  if (selectedElement) {
+                    selectedElement.classList.remove('selected');
+                  }
+                  this.classList.add('selected');
+                  selectedElement = this;
+                  selectedNameDiv.textContent = this.textContent;
+                });
+              });
+            })
+            .catch((error) => {
+              console.error('Error al llamar a la API:', error);
+              resultDiv.textContent = 'Error al llamar a la API';
+            });
+        }
+      });
+    </script>
+
+    <style>
+      .selected {
+        background-color: #e0e0e0;
+      }
+    </style>
+  </body> -->
+</html>

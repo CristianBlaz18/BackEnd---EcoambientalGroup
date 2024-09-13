@@ -1,0 +1,12 @@
+{
+    "$schema": "https://json.schemastore.org/nest-cli",
+    "collection": "@nestjs/schematics",
+    "sourceRoot": "src",
+    "compilerOptions": {
+      "deleteOutDir": true,
+      "plugins": ["@nestjs/swagger"],
+      "assets": ["**/*.json", "src", "usuario/usuarioVerificacion/**","**/*.json", "src", "usuario/correoVerificacion/**","**/*.json", "src", "usuario/correoContrasena/**","**/*.json"
+      ,"src", "openpay/correoCompletado/**","**/*.json","src", "openpay/correoCreado/**","**/*.json","src", "openpay/correoFallido/**","**/*.json","src", "openpay/correoPendiente/**","**/*.json"
+    ]
+    }
+  }
